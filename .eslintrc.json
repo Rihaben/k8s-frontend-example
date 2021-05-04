@@ -1,0 +1,130 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "env": {
+    "es6": true
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "k8s",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "k8s",
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ],
+        "@typescript-eslint/strict-boolean-expressions": ["off"],
+        "@typescript-eslint/require-await": ["off"],
+        "@typescript-eslint/no-unsafe-return": ["off"],
+        "@typescript-eslint/await-thenable": ["off"],
+        "@typescript-eslint/await-promise": ["off", "Thenable"],
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "extendDefaults": true,
+            "types": {
+              "{}": false
+            }
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": ["error", {
+          "allowExpressions": false,
+          "allowTypedFunctionExpressions": true,
+          "allowConciseArrowFunctionExpressionsStartingWithVoid": true
+        }],
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/member-ordering": [
+          "error",
+          {
+            "default": [
+              "public-static-field",
+              "protected-static-field",
+              "private-static-field",
+              "public-instance-field",
+              "protected-instance-field",
+              "private-instance-field",
+              "constructor",
+              "public-static-method",
+              "protected-static-method",
+              "private-static-method",
+              "public-instance-method",
+              "protected-instance-method",
+              "private-instance-method"
+            ]
+          }
+        ],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-parameter-properties": ["warn", { "allows": ["public", "private", "protected"] }],
+        "@typescript-eslint/no-shadow": ["error"],
+        "@typescript-eslint/no-unnecessary-condition": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/prefer-nullish-coalescing": "error",
+        "@typescript-eslint/prefer-optional-chain": "error",
+        "@typescript-eslint/unbound-method": "off",
+        "arrow-body-style": "error",
+        "no-unused-vars": "off",
+        "curly": "error",
+        "babel/object-curly-spacing": ["off", "always", {
+          "objectsInObjects": false,
+          "arraysInObjects": false
+        }],
+        "eqeqeq": ["error", "always", { "null": "ignore" }],
+        "guard-for-in": "error",
+        "no-bitwise": "error",
+        "no-caller": "error",
+        "no-console": ["off", { "allow": ["warn", "error"] }],
+        "no-eval": "error",
+        "no-labels": "error",
+        "no-new": "error",
+        "no-new-wrappers": "error",
+        "object-shorthand": ["error", "always", { "avoidExplicitReturnArrows": true }],
+        "radix": "error",
+        "spaced-comment": ["warn", "always"]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
