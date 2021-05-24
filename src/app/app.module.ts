@@ -5,10 +5,14 @@ import { AppRoutingModule } from '@k8s/app-routing.module';
 import { AppComponent } from '@k8s/app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@k8s/environment';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import locale from '@angular/common/locales/en';
+import { MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { missingTranslationHandler, translatePartialLoader } from '@k8s/config/translation.config';
+import { ApplicationConfig } from '@k8s/config/application.config';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -24,6 +28,17 @@ import { HttpClientModule } from '@angular/common/http';
 			// Register the ServiceWorker as soon as the app is stable
 			// or after 30 seconds (whichever comes first).
 			registrationStrategy: 'registerWhenStable:30000'
+		}),
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: translatePartialLoader,
+				deps: [HttpClient]
+			},
+			missingTranslationHandler: {
+				provide: MissingTranslationHandler,
+				useFactory: missingTranslationHandler
+			}
 		})
 	],
 	providers: [
@@ -36,4 +51,11 @@ import { HttpClientModule } from '@angular/common/http';
 	],
 	bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+	constructor(applicationConfig: ApplicationConfig, translateService: TranslateService) {
+		applicationConfig.setEndPointPrefix(environment.BASE_API_URL);
+		registerLocaleData(locale);
+		translateService.setDefaultLang('en');
+		translateService.use('en');
+	}
+}

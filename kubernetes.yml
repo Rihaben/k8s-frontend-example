@@ -15,8 +15,11 @@ spec:
       labels:
         app: k8s-frontend
     spec:
+      volumes:
+        - name: k8s-frontend-volume-images
+          emptyDir: {}
       containers:
-        - name: cms-sfa
+        - name: k8s-frontend
           image: laminalfalah/k8s-frontend
           imagePullPolicy: Always
           resources:
@@ -37,12 +40,15 @@ spec:
           livenessProbe:
             httpGet:
               port: 80
-              path: /_ah/health
+              path: /ping/health
             initialDelaySeconds: 0
             periodSeconds: 10
             timeoutSeconds: 1
             successThreshold: 1
             failureThreshold: 3
+          volumeMounts:
+            - mountPath: /usr/share/nginx/images
+              name: k8s-frontend-volume-images
 
 ---
 

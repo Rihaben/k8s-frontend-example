@@ -5,7 +5,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install -g -E @angular/cli @angular/compiler @angular-devkit/core @angular-devkit/schematics @angular-eslint/schematics @angular-eslint/template-parser
+RUN npm install -g -E @angular/cli @angular/compiler @angular-devkit/core @angular-devkit/schematics \
+    @angular-eslint/schematics @angular-eslint/template-parser
 
 RUN npm install
 
@@ -20,8 +21,9 @@ FROM nginx:1.20.0-alpine
 
 RUN mkdir -p /var/log/k8s-frontend
 
-RUN mkdir -p /usr/share/nginx/html/_ah && \
-    echo "healthy" > /usr/share/nginx/html/_ah/health
+RUN mkdir -p /usr/share/nginx/html/ping && \
+    echo "<html><head><title>Healthy</title></head><body><p>Healthy</p</body></html>" > \
+    /usr/share/nginx/html/ping/health
 
 VOLUME /var/cache/nginx
 

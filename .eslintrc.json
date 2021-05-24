@@ -63,6 +63,12 @@
           "allowConciseArrowFunctionExpressionsStartingWithVoid": true
         }],
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/restrict-template-expressions": [
+          "off",
+          {
+            "allowAny": true
+          }
+        ],
         "@typescript-eslint/member-ordering": [
           "error",
           {

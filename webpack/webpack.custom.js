@@ -16,7 +16,7 @@ module.exports = (config) => {
       }),
       new FriendlyErrorsWebpackPlugin(),
       new WebpackNotifierPlugin({
-        title: 'CMS SFA',
+        title: 'k8s-Frontend',
         emoji: true,
         contentImage: path.resolve(__dirname, 'logo-k8s.png')
       })
