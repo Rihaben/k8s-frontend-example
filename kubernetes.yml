@@ -20,7 +20,7 @@ spec:
           emptyDir: {}
       containers:
         - name: k8s-frontend
-          image: laminalfalah/k8s-frontend
+          image: rihabbennour/frontend
           imagePullPolicy: Always
           resources:
             limits:
@@ -64,7 +64,7 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-      protocol: TCP
+      nodePort: 30017
 
 ---
 
